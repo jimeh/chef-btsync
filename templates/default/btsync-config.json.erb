@@ -1,0 +1,46 @@
+{
+  "device_name": "<%= @config["device_name"] %>",
+  "listening_port": <%= @config["listening_port"] %>,
+  "storage_path": "<%= @config["storage_path"] %>",
+  "pid_file": "<%= @config["pid_file"] %>",
+  "check_for_updates": <%= @config["check_for_updates"] %>,
+  "use_upnp": <%= @config["use_upnp"] %>,
+  "download_limit": <%= @config["download_limit"] %>,
+  "upload_limit": <%= @config["upload_limit"] %>,
+  <% if @config["webui"]["enabled"] -%>
+  "webui": {
+    "listen": "<%= @config["webui"]["listen"] %>",
+    "login": "<%= @config["webui"]["login"] %>",
+    "password": "<%= @config["webui"]["password"] %>"
+  },
+  <% end -%>
+  "disk_low_priority": <%= @config["disk_low_priority"] %>,
+  "folder_rescan_interval": <%= @config["folder_rescan_interval"] %>,
+  "lan_encrypt_data": <%= @config["lan_encrypt_data"] %>,
+  "lan_use_tcp": <%= @config["lan_use_tcp"] %>,
+  "rate_limit_local_peers": <%= @config["rate_limit_local_peers"] %>,
+  "sync_max_time_diff": <%= @config["sync_max_time_diff"] %>,
+  "sync_trash_ttl": <%= @config["sync_trash_ttl"] %><% if !@config["shared_folders"].nil? && !@config["shared_folders"].empty? -%>,<% end %>
+  <% if !@config["shared_folders"].nil? && !@config["shared_folders"].empty? -%>
+  "shared_folders": [
+    <% @config["shared_folders"].each_with_index do |folder, folder_index| -%>
+    {
+      "secret": "<%= folder["secret"] %>",
+      "dir": "<%= folder["dir"] %>",
+      "use_relay_server": <%= folder["use_relay_server"] %>,
+      "use_tracker": <%= folder["use_tracker"] %>,
+      "use_dht": <%= folder["use_dht"] %>,
+      "search_lan": <%= folder["search_lan"] %>,
+      "use_sync_trash": <%= folder["use_sync_trash"] %><% if folder["known_hosts"].respond_to?(:each) && !folder["known_hosts"].empty? %>,<% end %>
+      <% if folder["known_hosts"].respond_to?(:each) && !folder["known_hosts"].empty? -%>
+      "known_hosts": [
+        <% folder["known_hosts"].each_with_index do |host, host_index| -%>
+        "<%= host %>"<% if host_index < (folder["known_hosts"].size - 1) %>,<% end %>
+        <% end -%>
+      ]
+      <% end -%>
+    }<% if folder_index < (@config["shared_folders"].size - 1) %>,<% end %>
+    <% end -%>
+  ]
+  <% end %>
+}
