@@ -29,7 +29,7 @@ end
 end
 
 # Ensure shared folder defaults are fully set.
-if bag_config["shared_folder_defaults"]
+if bag_config && bag_config["shared_folder_defaults"]
   config["shared_folder_defaults"] = node_config["shared_folder_defaults"].
     merge(bag_config["shared_folder_defaults"])
 end
