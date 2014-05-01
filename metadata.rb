@@ -4,7 +4,7 @@ maintainer_email "contact@jimeh.me"
 license          "MIT"
 description      "Install and configure BTSync."
 long_description IO.read(File.join(File.dirname(__FILE__), "README.md"))
-version          "0.1.0"
+version          "0.1.1"
 recipe           "btsync", "Installs, configures, and launches BTSync."
 recipe           "btsync::install", "Installs BTSync."
 recipe           "btsync::configure", "Configures BTSync."
