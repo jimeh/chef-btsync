@@ -29,9 +29,9 @@ available to set.
 
 ## Example Data Bag
 
-*data_bags/btsync/config.json:*
+data_bags/btsync/config.json:
 
-```
+```javascript
 {
   "id": "config",
   "user": "jimeh",
