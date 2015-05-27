@@ -14,7 +14,7 @@ if download_url
 
   execute "unpack-btsync-tarball" do
     cwd "#{Chef::Config[:file_cache_path]}/"
-    command "tar -xvzf #{Chef::Config[:file_cache_path]}/btsync.tar.gz && " +
+    command "tar --no-same-owner -xvzf #{Chef::Config[:file_cache_path]}/btsync.tar.gz && " +
       "mv btsync #{node["btsync"]["bin_dir"]}/ && " +
       "chmod +x #{node["btsync"]["bin_dir"]}/btsync && " +
       "rm #{Chef::Config[:file_cache_path]}/btsync.tar.gz"
